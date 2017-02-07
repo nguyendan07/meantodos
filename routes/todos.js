@@ -66,7 +66,7 @@ router.put('/todo/:id', function(req, res, next){
         });
     } else {
         db.todos.update({
-            _id: mongojs.ObjectId(res.params.id)
+            _id: mongojs.ObjectId(req.params.id)
         }, upObj, {}, function(err, result){
             if(err){
                 res.send(err);
@@ -80,14 +80,15 @@ router.put('/todo/:id', function(req, res, next){
 // Delete todo
 router.delete('/todo/:id', function(req, res, next){
     db.todos.remove({
-        _id: mongojs.ObjectId(res.params.id)
-    }, '', {}, function(err, result){
+        _id: mongojs.ObjectId(req.params.id)
+    },'', function(err, result){
         if(err){
             res.send(err);
         } else {
             res.json(result);
         }
     });
+ 
 });
 
 module.exports = router;
